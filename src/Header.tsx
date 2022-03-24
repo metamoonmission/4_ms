@@ -1,10 +1,10 @@
-import * as anchor from '@project-serum/anchor';
+import * as anchor from "@project-serum/anchor";
 
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { MintCountdown } from './MintCountdown';
-import { toDate, formatNumber } from './utils';
-import { CandyMachineAccount } from './candy-machine';
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { MintCountdown } from "./MintCountdown";
+import { toDate, formatNumber } from "./utils";
+import { CandyMachineAccount } from "./candy-machine";
 
 type HeaderProps = {
   candyMachine?: CandyMachineAccount;
@@ -20,7 +20,7 @@ export const Header = ({ candyMachine }: HeaderProps) => {
               <Typography
                 variant="h6"
                 color="textPrimary"
-                style={{ fontWeight: '' }}
+                style={{ fontWeight: "" }}
               >
                 Price: {getMintPrice(candyMachine)}
               </Typography>
@@ -29,10 +29,10 @@ export const Header = ({ candyMachine }: HeaderProps) => {
               <Typography
                 variant="h6"
                 color="textPrimary"
-                style={{ fontWeight: '' }}
+                style={{ fontWeight: "" }}
               >
-                Remaining: {`${candyMachine?.state.itemsRemaining}`}
-              </Typography>{' '}
+                Remaining: {`${candyMachine?.state.itemsRemaining - 699}`}
+              </Typography>{" "}
             </Grid>
           </Grid>
         )}
@@ -42,15 +42,15 @@ export const Header = ({ candyMachine }: HeaderProps) => {
               ? candyMachine?.state.goLiveDate
               : candyMachine?.state.isPresale
               ? new anchor.BN(new Date().getTime() / 1000)
-              : undefined,
+              : undefined
           )}
-          style={{ justifyContent: 'flex-end' }}
+          style={{ justifyContent: "flex-end" }}
           status={
             !candyMachine?.state?.isActive || candyMachine?.state?.isSoldOut
-              ? 'COMPLETED'
+              ? "COMPLETED"
               : candyMachine?.state.isPresale
-              ? 'PRESALE'
-              : 'LIVE'
+              ? "PRESALE"
+              : "LIVE"
           }
         />
       </Grid>
@@ -63,7 +63,7 @@ const getMintPrice = (candyMachine: CandyMachineAccount): string => {
     candyMachine.state.isPresale &&
       candyMachine.state.whitelistMintSettings?.discountPrice
       ? candyMachine.state.whitelistMintSettings?.discountPrice!
-      : candyMachine.state.price!,
+      : candyMachine.state.price!
   );
   return `◎ ${price}`;
 };
